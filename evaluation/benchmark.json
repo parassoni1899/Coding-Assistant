@@ -1,0 +1,32 @@
+[
+  {
+    "id": "q1",
+    "question": "Where is the authentication route handler registered in PocketBase?",
+    "reference_files": ["apis/record_auth.go"],
+    "ground_truth": "The registration occurs inside api.bindRecordAuthApi(api) under the route group, invoking api.app.OnRecordAuthRequest().Trigger()."
+  },
+  {
+    "id": "q2",
+    "question": "Which file handles password encryption during user registration?",
+    "reference_files": ["models/record.go", "tools/security/security.go"],
+    "ground_truth": "Password hashing is handled in security.go using bcrypt.GenerateFromPassword, and invoked from models.Record SetPassword()."
+  },
+  {
+    "id": "q3",
+    "question": "How does the mail sender interface work?",
+    "reference_files": ["tools/mailer/mailer.go"],
+    "ground_truth": "The mailer interface defines Send(message *Message) error. It is implemented by SmtpClient and SendmailClient."
+  },
+  {
+    "id": "q4",
+    "question": "Where are database migrations executed?",
+    "reference_files": ["core/db_migrations.go"],
+    "ground_truth": "Migrations run via app.RunMigrations() which uses the migrate tool to execute SQL schemas against the local SQLite database."
+  },
+  {
+    "id": "q5",
+    "question": "How are real-time events published to clients?",
+    "reference_files": ["apis/realtime.go", "core/events.go"],
+    "ground_truth": "Real-time subscriptions are managed in realtime.go which listens to core app events (like OnRecordAfterCreateRequest) and dispatches SSE (Server-Sent Events) to subscribed clients."
+  }
+]

@@ -1,0 +1,56 @@
+# =============================================================================
+# Codebase Assistant RAG — Python Dependencies
+# Install with: pip install -r requirements.txt
+# =============================================================================
+
+# ── Core Framework ──────────────────────────────────────────────────────────
+langchain>=0.2.0
+langchain-community>=0.2.0
+langchain-core>=0.2.0
+langchain-ollama>=0.1.0
+langchain-openai>=0.1.0
+langchain-anthropic>=0.1.0
+langchain-huggingface>=0.0.3
+langgraph>=0.1.0
+langchain-text-splitters>=0.2.0
+
+# ── Vector Stores ────────────────────────────────────────────────────────────
+chromadb>=0.5.0
+qdrant-client>=1.9.0
+pinecone-client>=3.0.0
+
+# ── Embeddings & Reranking ───────────────────────────────────────────────────
+sentence-transformers>=3.0.0
+# HuggingFace transformers (pulled by sentence-transformers, but pinning for stability)
+transformers>=4.40.0
+torch>=2.2.0           # CPU-only; for CUDA add: torch>=2.2.0+cu121
+cohere>=5.0.0
+
+# ── AST & Code Parsing ───────────────────────────────────────────────────────
+# Python tree-sitter for non-Go language support (Phase 2 extension)
+tree-sitter>=0.21.0
+# BM25 sparse retrieval
+rank-bm25>=0.2.2
+
+# ── Ingestion ────────────────────────────────────────────────────────────────
+GitPython>=3.1.40
+pathspec>=0.12.0       # .gitignore-style file pattern matching
+
+# ── Evaluation ───────────────────────────────────────────────────────────────
+ragas>=0.1.7
+deepeval>=0.21.0
+
+# ── API & UI ─────────────────────────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.0
+streamlit>=1.35.0
+
+# ── Utilities ────────────────────────────────────────────────────────────────
+python-dotenv>=1.0.0
+loguru>=0.7.2
+rich>=13.7.0            # Beautiful CLI output
+typer>=0.12.0           # CLI builder for main.py
+tqdm>=4.66.0            # Progress bars for ingestion
+httpx>=0.27.0
+tenacity>=8.3.0         # Retry logic for API calls

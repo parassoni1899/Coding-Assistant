@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # ─────────────────────────────────────────────────────────────────────────
+  # API Server (FastAPI)
+  # ─────────────────────────────────────────────────────────────────────────
+  api:
+    build: .
+    container_name: codebase-assistant-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data  # Persist index and cloned repos
+      - ./.env:/app/.env  # Pass environment config
+    command: ["uvicorn", "api.server:app", "--host", "0.0.0.0", "--port", "8000"]
+    depends_on:
+      - ollama
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Streamlit UI Dashboard
+  # ─────────────────────────────────────────────────────────────────────────
+  ui:
+    build: .
+    container_name: codebase-assistant-ui
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./.env:/app/.env
+    command: ["streamlit", "run", "ui/app.py", "--server.address", "0.0.0.0"]
+    depends_on:
+      - api
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Ollama Local LLM Sidecar
+  # ─────────────────────────────────────────────────────────────────────────
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    # Note: You must run `docker exec -it ollama ollama run qwen2.5-coder:7b` 
+    # and `docker exec -it ollama ollama run nomic-embed-text` manually once.
+
+volumes:
+  ollama_data:
