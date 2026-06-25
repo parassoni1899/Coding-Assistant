@@ -178,7 +178,7 @@ elif st.session_state.page == "ingest":
     
     col_btn1, col_btn2 = st.columns([1, 1])
     with col_btn1:
-        if st.button("⬅️ Back", kind="secondary"):
+        if st.button("⬅️ Back", type="secondary"):
             st.session_state.page = "home"
             st.rerun()
     with col_btn2:
@@ -230,7 +230,7 @@ elif st.session_state.page == "chat":
     with col1:
         st.markdown("<h2 style='margin:0;'>🤖 Assistant Workspace</h2>", unsafe_allow_html=True)
     with col2:
-        if st.button("🔄 Change Repo", kind="secondary"):
+        if st.button("🔄 Change Repo", type="secondary"):
             st.session_state.page = "ingest"
             st.rerun()
             
